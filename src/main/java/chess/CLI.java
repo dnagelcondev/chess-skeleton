@@ -3,6 +3,7 @@ package chess;
 import chess.pieces.Piece;
 
 import java.io.*;
+import java.util.List;
 
 /**
  * This class provides the basic CLI interface to the Chess game.
@@ -64,7 +65,8 @@ public class CLI {
                 } else if (input.equals("board")) {
                     writeOutput("Current Game:");
                 } else if (input.equals("list")) {
-                    writeOutput("====> List Is Not Implemented (yet) <====");
+                    listAllpossibleMoves();
+                    //writeOutput("====> List Is Not Implemented (yet) <====");
                 } else if (input.startsWith("move")) {
                     writeOutput("====> Move Is Not Implemented (yet) <====");
                 } else {
@@ -141,4 +143,27 @@ public class CLI {
         CLI cli = new CLI(System.in, System.out);
         cli.startEventLoop();
     }
+
+
+    private void listAllpossibleMoves(){
+        Player player = gameState.getCurrentPlayer();
+        String[] rows = {"1", "2", "3", "4", "5", "6", "7", "8"};
+        String[] cols = {"a", "b", "c", "d", "e", "f", "g", "h"};
+
+        for(int i=0; i<rows.length; i++){
+            for(int j=0; j<cols.length; j++){
+                String position = cols[j] + "" + rows[i];
+                Piece piece = gameState.getPieceAt(position);
+
+                if(piece == null){ continue; }
+                List<String> possibleMoves = piece.listAllPossibleMoves(gameState, player, position);
+
+                for(int k=0; k<possibleMoves.size(); k++){
+                    System.out.println(piece.getName() +  " from: " + position + " to: " + possibleMoves.get(k));
+                }
+            }
+        }
+    }
+
+
 }

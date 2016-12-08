@@ -2,6 +2,9 @@ package chess.pieces;
 
 import chess.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The 'Rook' class
  */
@@ -15,4 +18,14 @@ public class Rook extends Piece {
     protected char getIdentifyingCharacter() {
         return 'r';
     }
+
+    @Override
+    public List<String> listAllPossibleMoves(chess.GameState gameState, Player player, String position) {
+        List<String> moves = new ArrayList<>();
+
+
+        return moves;
+    }
+
+    public String getName(){ return "Rook"; }
 }
